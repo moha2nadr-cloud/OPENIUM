@@ -1,0 +1,68 @@
+name: Publish release
+
+# The APKs are built and signed in the (private) build repository. To publish them here they are pushed to the
+# temporary `upload` branch in <100 MB chunks (GitHub's per-file limit); once `upload/READY` arrives this job joins
+# them, checks every SHA-256, makes the 190 MB download parts, creates the public release and deletes the branch.
+on:
+  push:
+    branches: [upload]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Ready?
+        id: ready
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' -H "Authorization: Bearer $GH_TOKEN" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/contents/upload/READY?ref=upload")
+          echo "go=$([ "$code" = 200 ] && echo 1 || echo 0)" >> "$GITHUB_OUTPUT"
+      - name: Free disk space
+        if: steps.ready.outputs.go == '1'
+        run: sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/share/boost /usr/local/lib/android /opt/hostedtoolcache/CodeQL || true; df -h /
+      - uses: actions/checkout@v5
+        if: steps.ready.outputs.go == '1'
+        with:
+          ref: upload
+          fetch-depth: 1
+      - name: Join chunks and verify
+        if: steps.ready.outputs.go == '1'
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          while read -r name sha; do
+            [ -n "$name" ] || continue
+            cat upload/chunks/"$name".chunk.* > "out/$name"
+            rm -f upload/chunks/"$name".chunk.*
+            echo "$sha  out/$name" | sha256sum -c -
+          done < upload/manifest.txt
+          rm -rf .git
+          ls -la out
+      - name: Download parts
+        if: steps.ready.outputs.go == '1'
+        run: |
+          set -euo pipefail
+          cd out
+          full=$(ls OPENIUM-[0-9]*.apk | grep -v lite)
+          7z a -mx0 -v190m "${full%.apk}-full-apk.7z" "$full" > /dev/null
+          if [ -f OPENIUM-AI-model-part1.apk ]; then 7z a -mx0 -v190m OPENIUM-AI-model-part1.apk.7z OPENIUM-AI-model-part1.apk > /dev/null; fi
+          ls -la
+      - name: Create release
+        if: steps.ready.outputs.go == '1'
+        run: |
+          set -euo pipefail
+          tag=$(cat upload/TAG)
+          gh release create "$tag" --repo "$GITHUB_REPOSITORY" --title "OPENIUM ${tag#v}" --notes-file upload/notes.md --latest out/*
+      - name: Delete the upload branch
+        if: steps.ready.outputs.go == '1'
+        run: gh api -X DELETE "repos/${GITHUB_REPOSITORY}/git/refs/heads/upload"
