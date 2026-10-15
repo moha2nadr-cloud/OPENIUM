@@ -286,7 +286,7 @@
 
 - **مكتمل ومتحقَّق منه:** إعدادات العربية في المحرّك (انظر أدناه)، ومعرض القوالب وإنشاء مستندات جديدة منه، وواجهة أوامر المحرّك بالعربية.
 - **[تجريبي]:** تحويل مستندات أوفيس من وإلى PDF عبر هذا المحرّك.
-- **[مخطط]:** قائمة ميزات Writer وCalc وImpress وDraw وMath التفصيلية أدناه، والواجهة اللمسية الكاملة للتحرير، ووضع العرض الفوري، والتشغيل في عملية منفصلة. هذه هي الأهداف المعتمدة للقسم، وليست كلها متاحة في الإصدار الحالي.
+- **[تجريبي]:** المحرّك نفسه مبني ومضمَّن في التطبيق، ويفتح ملفات أوفيس ويحرّرها بواجهة LibreOffice للهاتف، فقائمة ميزات Writer وCalc وImpress وDraw وMath أدناه هي ميزات LibreOffice الموجودة في المحرّك؛ لكن لم يُتحقَّق منها بعدُ واحدةً واحدة على هاتف حقيقي. أما وضع العرض الفوري والتشغيل في عملية منفصلة فما زالا [مخطط].
 
 <details>
 <summary><b>معرض القوالب</b> (مكتمل: 43 قالباً بالعربية والإنجليزية والتركية)</summary>
@@ -321,7 +321,7 @@
 </details>
 
 <details>
-<summary><b>الصيغ المستهدفة للمحرّك</b> [مخطط]</summary>
+<summary><b>الصيغ التي يدعمها المحرّك</b> [تجريبي]</summary>
 
 - **مستندات:** DOC، DOCX، DOCM، DOT، DOTX، DOTM، RTF، ODT، OTT، FODT، WPS، WPD، Pages، HTML، TXT.
 - **جداول:** XLS، XLSX، XLSM، XLSB، XLT، XLTX، ODS، OTS، FODS، Numbers، CSV، TSV، DBF، SLK، DIF.
@@ -333,7 +333,7 @@
 </details>
 
 <details>
-<summary><b>Writer (معالج النصوص)</b> [مخطط]</summary>
+<summary><b>Writer (معالج النصوص)</b> [تجريبي]</summary>
 
 - تنسيق الأحرف والفقرات (المحاذاة، الاتجاه، المسافات البادئة، تباعد الأسطر، الحدود، التظليل، علامات الجدولة، منع الأسطر اليتيمة).
 - الأنماط بأنواعها ومعرض الأنماط، والقوائم النقطية والمرقّمة ومتعددة المستويات (بترقيم أبجدي عربي).
@@ -347,7 +347,7 @@
 </details>
 
 <details>
-<summary><b>Calc (الجداول)</b> [مخطط]</summary>
+<summary><b>Calc (الجداول)</b> [تجريبي]</summary>
 
 - أكثر من 500 دالة مع شريط معادلات ومساعد دوال بالعربية.
 - تنسيق الخلايا (أرقام هندية، عملات مثل الريال والجنيه والليرة، تواريخ هجرية)، أوراق من اليمين لليسار افتراضياً.
@@ -360,7 +360,7 @@
 </details>
 
 <details>
-<summary><b>Impress (العروض التقديمية)</b> [مخطط]</summary>
+<summary><b>Impress (العروض التقديمية)</b> [تجريبي]</summary>
 
 - تحرير الشرائح (نص، صور، أشكال، جداول، رسوم بيانية)، التخطيطات والشرائح الرئيسية والسمات.
 - الانتقالات والحركات، العرض بملء الشاشة مع ترتيب من اليمين لليسار للعروض العربية.
@@ -370,7 +370,7 @@
 </details>
 
 <details>
-<summary><b>Draw وMath</b> [مخطط]</summary>
+<summary><b>Draw وMath</b> [تجريبي]</summary>
 
 - مخططات وأشكال انسيابية وموصلات وطبقات، فتح وتحرير Visio وPublisher وCorelDraw وSVG، تحرير PDF عبر Draw.
 - محرّر معادلات بلوحة مرئية وصيغة نصية، وإدراج المعادلات في المستندات والجداول والعروض.
@@ -898,10 +898,10 @@ Office is built on an embedded **LibreOffice engine**, offline. It is the larges
 
 - **Done:** Arabic defaults in the engine (CTL/RTL on by default, RTL paragraphs, tables and sheets, mixed text, Arabic/English/Turkish spell checking, kashida justification, Arabic-Indic digits, Hijri cell formats, bundled Arabic fonts with substitutes for Microsoft fonts, an automated test set of real Arabic Office files, engine commands in the app's language); the **template gallery** (43 templates: 15 Word, 11 Excel with working formulas, 11 PowerPoint, 6 drawings and diagrams, in Arabic, English and Turkish); new documents from Home or Files.
 - **[beta]:** Office to/from PDF conversion through this engine.
-- **[planned]:** the full Writer, Calc, Impress, Draw and Math feature sets, the full touch editing UI, instant viewer mode and a separate engine process. English and Turkish hyphenation dictionaries.
+- **[beta]:** the engine itself is built into the app and opens and edits Office files with LibreOffice's phone UI, so the Writer, Calc, Impress, Draw and Math features below are LibreOffice's own; they have not yet been verified one by one on a real phone. Instant viewer mode, a separate engine process and English/Turkish hyphenation remain [planned].
 
 <details>
-<summary><b>Planned Office feature set</b> [planned]</summary>
+<summary><b>Office feature set (LibreOffice engine)</b> [beta]</summary>
 
 - **Formats:** DOC/DOCX/DOCM/DOT(X/M), RTF, ODT/OTT/FODT, WPS, WPD, Pages; XLS/XLSX/XLSM/XLSB/XLT(X), ODS/OTS/FODS, Numbers, CSV, TSV, DBF, SLK, DIF; PPT/PPTX/PPTM/PPS(X)/POT(X), ODP/OTP/FODP, Keynote; ODG, Visio, CorelDraw, Publisher, SVG, EMF/WMF, PDF import; ODF formulas and legacy formats; save as every format LibreOffice writes; password files; autosave, crash recovery, version history; mobile reading view; printing; embedded fonts.
 - **Writer:** character, paragraph and style formatting; lists with Arabic abjad numbering; tables, images, shapes, charts; headers/footers, footnotes, TOC and indexes, cross-references; sections and columns; page layout with RTL binding; track changes, comments, compare, mail merge; fields (Hijri dates); regex find with diacritic folding; word count; spelling and thesaurus; equations; navigator; protection; export to PDF/EPUB/HTML/images; Basic macros (partial VBA).
